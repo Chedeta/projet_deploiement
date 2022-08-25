@@ -13,11 +13,6 @@ def page2():
 
 
     ### Config
-    st.set_page_config(
-        page_title="Dashboard - GetAround",
-        page_icon="💸 ",
-        layout="wide"
-    )
 
     DATA_URL = 'get_around_delay_analysis.csv'
 
