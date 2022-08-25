@@ -110,7 +110,7 @@ def page3():
     import pandas as pd
     import seaborn as sns
     import matplotlib.pyplot as plt
-    DATA_URL = 'get_around_delay_analysis.csv'
+    DATA_URL = 'get_around_pricing_project.csv'
     @st.cache
     def load_data():
         data = pd.read_csv(DATA_URL)
