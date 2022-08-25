@@ -135,7 +135,7 @@ def page3():
     #petal_length = st.text_input('Enter petal_length', '')
     #petal_width = st.text_input('Enter petal_width', '')
     #if st.button("Predict"):
-        predict_class()
+        #predict_class()
 
 page_names_to_funcs = {
     "Main Page": main_page,
