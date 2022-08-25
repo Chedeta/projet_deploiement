@@ -131,7 +131,7 @@ def page3():
         #title = new_df.columns.tolist()
         #pred_df = pd.DataFrame(np.zeros((1,14)), columns=title)
         loaded_scaler = pickle.load(open('scaler.pkl', 'rb'))
-        pred_input = loaded_scaler.transform(dataset_pricing.iloc[0])
+        pred_input = loaded_scaler.transform(dataset_pricing.iloc[0:1])
         loaded_model = pickle.load(open('final_model.sav', 'rb'))
         result = loaded_model.predict(pred_input)
         return result
