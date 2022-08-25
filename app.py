@@ -110,6 +110,9 @@ def page3():
     import pandas as pd
     import seaborn as sns
     import matplotlib.pyplot as plt
+    import pickle
+    from sklearn.linear_model import LogisticRegression
+    
     DATA_URL = 'get_around_pricing_project.csv'
     @st.cache
     def load_data():
@@ -119,14 +122,22 @@ def page3():
     data_load_state = st.text('Chargement...')
     dataset_pricing = load_data()
     data_load_state.text("") # change text from "Loading data..." to "" once the the load_data function has run
-
     
+    loaded_model = pickle.load(open('final_model.sav', 'rb'))
+    result = loaded_model
+    def predict_price():
+        new_df = dataset_pricing
+        new_df.drop('rental_price_per_day',axis=1,inplace=True)
+        title = new_df.columns.tolist()
+        pred_df = pd.DataFrame(np.zeros((1,14)), columns=title)
     st.markdown("# Prédiction")
     st.sidebar.markdown("# Prédiction 🎉")
     st.markdown("**Veuillez entrer les informations concernant votre véhicule :**")
     marque = st.selectbox('Marque :',tuple(dataset_pricing['model_key'].unique()))
     kil = st.text_input('Entrer le kilométrage :', '')
+    kil = int(kil)
     puissance = st.text_input('Entrer la puissance du véhicule (en CV) :', '')
+    puissance = int(puissance)
     energie = st.selectbox('Carburant :',tuple(dataset_pricing['fuel'].unique()))
     couleur = st.selectbox('Couleur du véhicule :',tuple(dataset_pricing['paint_color'].unique()))
     car_type = st.selectbox('Type de véhicule :',tuple(dataset_pricing['car_type'].unique()))
@@ -165,9 +176,9 @@ def page3():
         hiver = True
     else:
         hiver = False
-    #if st.button("Predict"):
-        #predict_class()
-
+    if st.button("Predict"):
+        predict_price()
+    
 page_names_to_funcs = {
     "Main Page": main_page,
     "Dashboard": page2,
