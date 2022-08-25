@@ -124,10 +124,11 @@ def page3():
     data_load_state.text("") # change text from "Loading data..." to "" once the the load_data function has run
     
     def predict_price(values):
+        dataset_pricing = load_data()
+        dataset_pricing.drop('rental_price_per_day', axis=1, inplace=True)
         import joblib
-        df = dataset_pricing.drop('rental_price_per_day', axis=1)
-        predict_array = np.zeros((1,14))
-        im_df = pd.DataFrame(predict_array, columns=df.columns)
+        predict_array = np.zeros((1,13))
+        im_df = pd.DataFrame(predict_array, columns=dataset_pricing.columns)
         im_df[0:1] = values
         loaded_model = joblib.load('finalized_model.sav')
         pipeline = joblib.load('finalized_prepoc.sav')
