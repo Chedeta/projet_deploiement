@@ -180,7 +180,7 @@ def page3():
     if st.button("Predict"):
         list_values = [marque,int(kil), int(puissance), energie, couleur, car_type, parking, gps, ac, auto, gac, speed, hiver]
         st.text(''.join(str(list_values)))
-        st.text(str(predict_price()))
+        st.text(str(predict_price(list_values)))
     
 page_names_to_funcs = {
     "Main Page": main_page,
