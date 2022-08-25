@@ -124,18 +124,17 @@ def page3():
     data_load_state.text("") # change text from "Loading data..." to "" once the the load_data function has run
     
     def predict_price(values):
-        dataset_pricing = load_data()
-        dataset_pricing.drop('rental_price_per_day', axis=1, inplace=True)
         import joblib
         predict_array = np.zeros((1,13))
-        im_df = pd.DataFrame(predict_array, columns=dataset_pricing.columns)
-        st.text(print(im_df))
+        im_df = pd.DataFrame(predict_array, columns=['model_key', 'mileage', 'engine_power', 'fuel', 'paint_color',
+       'car_type', 'private_parking_available', 'has_gps',
+       'has_air_conditioning', 'automatic_car', 'has_getaround_connect',
+       'has_speed_regulator', 'winter_tires'])
         im_df[0:1] = values
-        st.text(print(im_df))
-        #loaded_model = joblib.load('finalized_model.sav')
-        #pipeline = joblib.load('finalized_prepoc.sav')
-        #result = loaded_model.predict(pipeline.transform(im_df))
-        return 
+        loaded_model = joblib.load('finalized_model.sav')
+        pipeline = joblib.load('finalized_prepoc.sav')
+        result = loaded_model.predict(pipeline.transform(im_df))
+        return result
     st.markdown("# Prédiction")
     st.sidebar.markdown("# Prédiction 🎉")
     st.markdown("**Veuillez entrer les informations concernant votre véhicule :**")
