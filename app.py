@@ -126,7 +126,7 @@ def page3():
     def predict_price(values):
         import joblib
         df = dataset_pricing.drop('rental_price_per_day', axis=1)
-        predict_array = np.zeros((1,12))
+        predict_array = np.zeros((1,14))
         im_df = pd.DataFrame(predict_array, columns=df.columns)
         im_df[0:1] = values
         loaded_model = joblib.load('finalized_model.sav')
