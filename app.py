@@ -125,7 +125,8 @@ def page3():
     
     loaded_model = pickle.load(open('final_model.sav', 'rb'))
     result = loaded_model
-    def predict_price():
+    def predict_price(values):
+        print(values)
         import joblib
         #new_df = dataset_pricing
         #new_df.drop('rental_price_per_day',axis=1,inplace=True)
@@ -138,7 +139,7 @@ def page3():
         pred_input = loaded_scaler.transform(df)
         
         loaded_model = joblib.load(open('final_model.joblib', 'rb'))
-        result = loaded_model.predict(df[:
+        result = loaded_model.predict(df.iloc[0:1])
         return result
     st.markdown("# Prédiction")
     st.sidebar.markdown("# Prédiction 🎉")
@@ -185,7 +186,8 @@ def page3():
     else:
         hiver = False
     if st.button("Predict"):
-        predict_price()
+        list_values = [marque,int(kil), int(puissance), puissance, energie, couleur, car_type, parking, gps, ac, auto, gac, speed, hiver]
+        predict_price(list_values)
     
 page_names_to_funcs = {
     "Main Page": main_page,
