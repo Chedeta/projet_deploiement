@@ -115,13 +115,8 @@ def page3():
     def load_data():
         data = pd.read_csv(DATA_URL)
         return data
-    st.subheader("Load and showcase data")
-    st.markdown("""
-        You can use the usual Data Science libraries like `pandas` or `numpy` to load data. 
-        Then simply use [`st.write()`](https://docs.streamlit.io/library/api-reference/write-magic/st.write) to showcase it on your web app. 
-    """)
-
-    data_load_state = st.text('Loading data...')
+    
+    data_load_state = st.text('Chargement...')
     dataset_pricing = load_data()
     data_load_state.text("") # change text from "Loading data..." to "" once the the load_data function has run
 
@@ -129,10 +124,47 @@ def page3():
     st.markdown("# Prédiction")
     st.sidebar.markdown("# Prédiction 🎉")
     st.markdown("**Veuillez entrer les informations concernant votre véhicule :**")
-    option = st.selectbox('Marque :',tuple(dataset_pricing['model_key'].unique()))
-    #sepal_width = st.text_input('Enter sepal_width', '')
-    #petal_length = st.text_input('Enter petal_length', '')
-    #petal_width = st.text_input('Enter petal_width', '')
+    marque = st.selectbox('Marque :',tuple(dataset_pricing['model_key'].unique()))
+    kil = st.text_input('Entrer le kilométrage :', '')
+    puissance = st.text_input('Entrer la puissance du véhicule (en CV) :', '')
+    energie = st.selectbox('Carburant :',tuple(dataset_pricing['fuel'].unique()))
+    couleur = st.selectbox('Couleur du véhicule :',tuple(dataset_pricing['paint_color'].unique()))
+    car_type = st.selectbox('Type de véhicule :',tuple(dataset_pricing['car_type'].unique()))
+    parking = st.selectbox('Place de parking privéê :',('Yes', 'No'))
+    if parking == 'Yes':
+        parking = True
+    else:
+        parking = False
+    gps = st.selectbox('GPS intégré :',('Yes', 'No'))
+    if gps == 'Yes':
+        gps = True
+    else:
+        gps = False
+    ac = st.selectbox('Climatisation :',('Yes', 'No'))
+    if ac == 'Yes':
+        ac = True
+    else:
+        ac = False
+    auto = st.selectbox('Boîte automatique :',('Yes', 'No'))
+    if auto == 'Yes':
+        auto = True
+    else:
+        auto = False
+    gac = st.selectbox('GetAround Connect :',('Yes', 'No'))
+    if gac == 'Yes':
+        gac = True
+    else:
+        gac = False
+    speed = st.selectbox('Régulateur de vitesse :',('Yes', 'No'))
+    if speed == 'Yes':
+        speed = True
+    else:
+        speed = False
+    hiver = st.selectbox('Pneus hiver :',('Yes', 'No'))
+    if hiver == 'Yes':
+        hiver = True
+    else:
+        hiver = False
     #if st.button("Predict"):
         #predict_class()
 
