@@ -130,8 +130,11 @@ def page3():
         #new_df.drop('rental_price_per_day',axis=1,inplace=True)
         #title = new_df.columns.tolist()
         #pred_df = pd.DataFrame(np.zeros((1,14)), columns=title)
+        categorical = dataset_pricing.columns.drop(["mileage","engine_power", "rental_price_per_day"])
+        continuous = ["mileage","engine_power"]
         loaded_scaler = pickle.load(open('scaler.pkl', 'rb'))
-        pred_input = loaded_scaler.transform(dataset_pricing.iloc[0:1])
+        df = dataset_pricing.iloc[0:1].drop('rental_price_per_day', axis=1)
+        pred_input = loaded_scaler.transform(df)
         loaded_model = pickle.load(open('final_model.sav', 'rb'))
         result = loaded_model.predict(pred_input)
         return result
