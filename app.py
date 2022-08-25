@@ -114,7 +114,7 @@ def page3():
     from sklearn.linear_model import LogisticRegression
     
     DATA_URL = 'get_around_pricing_project.csv'
-    @st.cache
+    @st.cache(allow_output_mutation=True)
     def load_data():
         data = pd.read_csv(DATA_URL)
         return data
@@ -126,10 +126,14 @@ def page3():
     loaded_model = pickle.load(open('final_model.sav', 'rb'))
     result = loaded_model
     def predict_price():
-        new_df = dataset_pricing
-        new_df.drop('rental_price_per_day',axis=1,inplace=True)
-        title = new_df.columns.tolist()
-        pred_df = pd.DataFrame(np.zeros((1,14)), columns=title)
+        #new_df = dataset_pricing
+        #new_df.drop('rental_price_per_day',axis=1,inplace=True)
+        #title = new_df.columns.tolist()
+        #pred_df = pd.DataFrame(np.zeros((1,14)), columns=title)
+        loaded_model = pickle.load(open('final_model.sav', 'rb'))
+        pred_input = dataset_pricing.iloc[0]
+        result = loaded_model.predict(pred_input)
+        return result
     st.markdown("# Prédiction")
     st.sidebar.markdown("# Prédiction 🎉")
     st.markdown("**Veuillez entrer les informations concernant votre véhicule :**")
