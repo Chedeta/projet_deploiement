@@ -186,7 +186,8 @@ def page3():
         hiver = False
     if st.button("Predict"):
         list_values = [marque,int(kil), int(puissance), puissance, energie, couleur, car_type, parking, gps, ac, auto, gac, speed, hiver]
-        print(list_values)
+        st.text('hello')
+        st.text(''.join(list_value))
     
 page_names_to_funcs = {
     "Main Page": main_page,
