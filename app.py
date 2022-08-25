@@ -115,7 +115,6 @@ def page3():
     def load_data():
         data = pd.read_csv(DATA_URL)
         return data
-    dataset_pricing = load_data()
     st.subheader("Load and showcase data")
     st.markdown("""
         You can use the usual Data Science libraries like `pandas` or `numpy` to load data. 
@@ -123,14 +122,14 @@ def page3():
     """)
 
     data_load_state = st.text('Loading data...')
-    dataset_delay = load_data()
+    dataset_pricing = load_data()
     data_load_state.text("") # change text from "Loading data..." to "" once the the load_data function has run
 
     
     st.markdown("# Prédiction")
     st.sidebar.markdown("# Prédiction 🎉")
     st.markdown("**Veuillez entrer les informations concernant votre véhicule :**")
-    option = st.selectbox('Marque :',tuple(dataset_pricing['model_key'].unique()))
+    option = st.selectbox('Marque :',tuple(dataset_pricing.model_key.unique()))
     #sepal_width = st.text_input('Enter sepal_width', '')
     #petal_length = st.text_input('Enter petal_length', '')
     #petal_width = st.text_input('Enter petal_width', '')
