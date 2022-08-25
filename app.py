@@ -129,7 +129,7 @@ def page3():
     st.markdown("# Prédiction")
     st.sidebar.markdown("# Prédiction 🎉")
     st.markdown("**Veuillez entrer les informations concernant votre véhicule :**")
-    option = st.selectbox('Marque :',tuple(dataset_pricing.model_key.unique()))
+    option = st.selectbox('Marque :',tuple(dataset_pricing['model_key'].unique()))
     #sepal_width = st.text_input('Enter sepal_width', '')
     #petal_length = st.text_input('Enter petal_length', '')
     #petal_width = st.text_input('Enter petal_width', '')
