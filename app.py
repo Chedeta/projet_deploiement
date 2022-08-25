@@ -129,11 +129,13 @@ def page3():
         import joblib
         predict_array = np.zeros((1,13))
         im_df = pd.DataFrame(predict_array, columns=dataset_pricing.columns)
+        st.text(print(im_df))
         im_df[0:1] = values
-        loaded_model = joblib.load('finalized_model.sav')
-        pipeline = joblib.load('finalized_prepoc.sav')
-        result = loaded_model.predict(pipeline.transform(im_df))
-        return result
+        st.text(print(im_df))
+        #loaded_model = joblib.load('finalized_model.sav')
+        #pipeline = joblib.load('finalized_prepoc.sav')
+        #result = loaded_model.predict(pipeline.transform(im_df))
+        return 
     st.markdown("# Prédiction")
     st.sidebar.markdown("# Prédiction 🎉")
     st.markdown("**Veuillez entrer les informations concernant votre véhicule :**")
