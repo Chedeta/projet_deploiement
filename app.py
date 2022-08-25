@@ -126,20 +126,15 @@ def page3():
     loaded_model = pickle.load(open('final_model.sav', 'rb'))
     result = loaded_model
     def predict_price(values):
-        #import joblib
-        #new_df = dataset_pricing
-        #new_df.drop('rental_price_per_day',axis=1,inplace=True)
-        #title = new_df.columns.tolist()
-        #pred_df = pd.DataFrame(np.zeros((1,14)), columns=title)
-        #categorical = dataset_pricing.columns.drop(["mileage","engine_power", "rental_price_per_day"])
-        #continuous = ["mileage","engine_power"]
-        #loaded_scaler = joblib.load(open('scaler.joblib', 'rb'))
-        #df = dataset_pricing.drop('rental_price_per_day', axis=1)
-        #pred_input = loaded_scaler.transform(df)
-        
-        #loaded_model = joblib.load(open('final_model.joblib', 'rb'))
-        #result = loaded_model.predict(df.iloc[0:1])'''
-        return values
+        import joblib
+        df = dataset_pricing.drop('rental_price_per_day', axis=1)
+        predict_array = np.zeros((1,13))
+        im_df = pd.DataFrame(predict_array, columns=df.columns)
+        im_df[0:1] = values
+        loaded_model = joblib.load('finalized_model.sav')
+        pipeline = loblib.load('finalized_prepoc.sav')
+        result = loaded_model.predict(pipeline.transform(im_df))
+        return result
     st.markdown("# Prédiction")
     st.sidebar.markdown("# Prédiction 🎉")
     st.markdown("**Veuillez entrer les informations concernant votre véhicule :**")
@@ -187,6 +182,7 @@ def page3():
     if st.button("Predict"):
         list_values = [marque,int(kil), int(puissance), energie, couleur, car_type, parking, gps, ac, auto, gac, speed, hiver]
         st.text(''.join(str(list_values)))
+        st.text(str(predict_price()))
     
 page_names_to_funcs = {
     "Main Page": main_page,
