@@ -127,20 +127,20 @@ def page3():
     result = loaded_model
     def predict_price(values):
         print(values)
-        import joblib
+        #import joblib
         #new_df = dataset_pricing
         #new_df.drop('rental_price_per_day',axis=1,inplace=True)
         #title = new_df.columns.tolist()
         #pred_df = pd.DataFrame(np.zeros((1,14)), columns=title)
-        categorical = dataset_pricing.columns.drop(["mileage","engine_power", "rental_price_per_day"])
+        '''categorical = dataset_pricing.columns.drop(["mileage","engine_power", "rental_price_per_day"])
         continuous = ["mileage","engine_power"]
         loaded_scaler = joblib.load(open('scaler.joblib', 'rb'))
         df = dataset_pricing.drop('rental_price_per_day', axis=1)
         pred_input = loaded_scaler.transform(df)
         
         loaded_model = joblib.load(open('final_model.joblib', 'rb'))
-        result = loaded_model.predict(df.iloc[0:1])
-        return result
+        result = loaded_model.predict(df.iloc[0:1])'''
+        return 
     st.markdown("# Prédiction")
     st.sidebar.markdown("# Prédiction 🎉")
     st.markdown("**Veuillez entrer les informations concernant votre véhicule :**")
