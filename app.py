@@ -86,8 +86,8 @@ def page2():
     st.line_chart(data=df_delay_stat_treshold, x='Threshold (min)', y=["Rent_lost_mobile(%)", 'Rent_lost_connect(%)'], use_container_width=True)
     delay = st.slider('Quel délai souhaitez vous mettre en deux locations (en minutes) :', 0, 400, 60)
     delay=int(delay)
-    st.write(f'Pourcentage de location perdue sur mobile pour un délai de {(df_delay_stat_treshold.iloc[delay][1])/100:.2%})
-    st.write(f"Pourcentage de location perdue sur l'appli pour un délai de {(df_delay_stat_treshold.iloc[delay][2])/100:.2%})
+    st.write(f'Pourcentage de location perdue sur mobile pour un délai de {(df_delay_stat_treshold.iloc[delay][1])/100:.2%}')
+    st.write(f"Pourcentage de location perdue sur l'appli pour un délai de {(df_delay_stat_treshold.iloc[delay][2])/100:.2%}")
 
 
 def page3():
