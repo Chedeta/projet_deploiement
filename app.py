@@ -46,14 +46,14 @@ def page2():
     # because it will cache your data so that your app 
     # won't have to reload it each time you refresh your app
     @st.cache
-    def load_data():
-        data = pd.read_csv(DATA_URL)
-        return data
+    def load_data2():
+        data2 = pd.read_csv(DATA_URL)
+        return data2
 
     st.subheader("Load and showcase data")
 
     data_load_state = st.text('Loading data...')
-    dataset_delay = load_data()
+    dataset_delay = load_data2()
     data_load_state.text("") # change text from "Loading data..." to "" once the the load_data function has run
     #Count the number of cases where the delay at check out was higher than expected
     dataset_delay.dropna(subset=['delay_at_checkout_in_minutes'], inplace=True)
