@@ -42,7 +42,6 @@ def page2():
 
     data_load_state = st.text('Loading data...')
     dataset_delay = load_data2()
-    data_load_state = st.text('')
     dataset_delay.dropna(subset=['delay_at_checkout_in_minutes'], inplace=True)
     dataset_delay = dataset_delay.reset_index(drop=True)
     dataset_delay['delay_problem']= dataset_delay['delay_at_checkout_in_minutes']-dataset_delay['time_delta_with_previous_rental_in_minutes']
@@ -61,7 +60,7 @@ def page2():
 
     nb_rent_connect=  dataset_delay[dataset_delay['checkin_type']=='connect'].count()[0]
     nb_rent_mobile=  dataset_delay[dataset_delay['checkin_type']=='mobile'].count()[0]
-
+    
     for i in range (0,400):
         x_plot[i]=i
         y_mobile[i]=(compute_stats_threshold(i,'mobile')[0])
@@ -71,6 +70,7 @@ def page2():
     df_delay_stat_treshold = pd.DataFrame({'Threshold (min)': x_plot.values(),'Rent_lost_mobile(%)': y_mobile_ratio.values(),'Rent_lost_connect(%)': y_connect_ratio.values()})
 
     st.line_chart(data=df_delay_stat_treshold, x='Threshold (min)', y=["Rent_lost_mobile(%)", 'Rent_lost_connect(%)'], use_container_width=True)
+    data_load_state = st.text('')
     delay = st.slider('Quel délai en deux locations **(en minutes)** :', 0, 400, 60)
     delay=int(delay)
     st.write(f'Pourcentage de location perdue sur **mobile** pour un délai de {delay} minutes : **{(df_delay_stat_treshold.iloc[delay][1])/100:.2%}**')
