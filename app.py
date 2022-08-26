@@ -39,8 +39,7 @@ def page2():
         return data2
 
     st.subheader("Partie X : Dans quelle mesure le délai mis en place entre les deux locations affecte le nombre de locations ?")
-
-    data_load_state = st.text('Loading data...')
+    
     dataset_delay = load_data2()
     dataset_delay.dropna(subset=['delay_at_checkout_in_minutes'], inplace=True)
     dataset_delay = dataset_delay.reset_index(drop=True)
@@ -70,12 +69,11 @@ def page2():
     df_delay_stat_treshold = pd.DataFrame({'Threshold (min)': x_plot.values(),'Rent_lost_mobile(%)': y_mobile_ratio.values(),'Rent_lost_connect(%)': y_connect_ratio.values()})
 
     st.line_chart(data=df_delay_stat_treshold, x='Threshold (min)', y=["Rent_lost_mobile(%)", 'Rent_lost_connect(%)'], use_container_width=True)
-    data_load_state = st.text(' ')
     delay = st.slider('Quel délai en deux locations (en minutes) :', 0, 400, 60)
     delay=int(delay)
     st.write(f'Pourcentage de location perdue sur **mobile** pour un délai de {delay} minutes : **{(df_delay_stat_treshold.iloc[delay][1])/100:.2%}**')
     st.write(f"Pourcentage de location perdue sur **l'application** pour un délai de {delay} minutes : **{(df_delay_stat_treshold.iloc[delay][2])/100:.2%}**")
-
+    st.markdown("---")
 
 def page3():
     import streamlit as st
