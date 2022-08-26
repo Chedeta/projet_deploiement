@@ -134,7 +134,7 @@ def page3():
         loaded_model = joblib.load('finalized_model.sav')
         pipeline = joblib.load('finalized_prepoc.sav')
         result = loaded_model.predict(pipeline.transform(im_df))
-        return result
+        return result[0]
     st.markdown("# Prédiction")
     st.sidebar.markdown("# Prédiction 🎉")
     st.markdown("**Veuillez entrer les informations concernant votre véhicule :**")
@@ -181,8 +181,8 @@ def page3():
         hiver = False
     if st.button("Predict"):
         list_values = [marque,int(kil), int(puissance), energie, couleur, car_type, parking, gps, ac, auto, gac, speed, hiver]
-        predict_price(list_values)
-    
+        result = predict_price(list_values)
+        st.success(f"Le montant de location à la journée de votre véhicule s'élève à {result:.2f} €")
 page_names_to_funcs = {
     "Main Page": main_page,
     "Dashboard": page2,
