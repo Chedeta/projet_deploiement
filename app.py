@@ -47,7 +47,7 @@ def page2():
     # won't have to reload it each time you refresh your app
     @st.cache
     def load_data2():
-        data2 = pd.read_csv(DATA_URL)
+        data2 = pd.read_csv(DATA_URL, sep=';')
         return data2
 
     st.subheader("Load and showcase data")
