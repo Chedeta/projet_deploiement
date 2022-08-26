@@ -54,8 +54,7 @@ def page2():
 
     data_load_state = st.text('Loading data...')
     dataset_delay = load_data2()
-    data_load_state.text("TIRIORIKRKOO") # change text from "Loading data..." to "" once the the load_data function has run
-    st.text(dataset_delay.columns)
+    data_load_state.text("") # change text from "Loading data..." to "" once the the load_data function has run
     #Count the number of cases where the delay at check out was higher than expected
     dataset_delay.dropna(subset=['delay_at_checkout_in_minutes'], inplace=True)
     dataset_delay = dataset_delay.reset_index(drop=True)
@@ -85,6 +84,8 @@ def page2():
     df_delay_stat_treshold = pd.DataFrame({'Threshold (min)': x_plot.values(),'Rent_lost_mobile(%)': y_mobile_ratio.values(),'Rent_lost_connect(%)': y_connect_ratio.values()})
 
     st.line_chart(data=df_delay_stat_treshold, x='Threshold (min)', y=["Rent_lost_mobile(%)", 'Rent_lost_connect(%)'], use_container_width=True)
+    values = st.slider('Select a range of values',0.0, 100.0, (25.0, 75.0))
+    st.write('Values:', values)
 
 
 def page3():
