@@ -22,29 +22,17 @@ def page2():
     import plotly.graph_objects as go
     import numpy as np
 
-
-    ### Config
-
     DATA_URL = 'get_around_delay_analysis.csv'
-
-
-    ### App
-    st.title("Build dashboards with Streamlit 🎨")
-
+    
+    st.title("Dashboard : Analyse d'un jeu de données de GetAround 🚗💲")
     st.markdown("""
         Welcome to this awesome `streamlit` dashboard. This library is great to build very fast and
         intuitive charts and application running on the web. Here is a showcase of what you can do with
         it. Our data comes from an e-commerce website that simply displays samples of customer sales. Let's check it out.
         Also, if you want to have a real quick overview of what streamlit is all about, feel free to watch the below video 👇
     """)
-
-
     st.markdown("---")
-
-
-    # Use `st.cache` when loading data is extremly useful
-    # because it will cache your data so that your app 
-    # won't have to reload it each time you refresh your app
+    
     @st.cache(allow_output_mutation=True)
     def load_data2():
         data2 = pd.read_csv(DATA_URL, sep=';')
