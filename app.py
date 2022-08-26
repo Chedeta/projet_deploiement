@@ -68,9 +68,9 @@ def page2():
             y_mobile_ratio[i]=(compute_stats_threshold(i,'mobile')[0])/nb_rent_mobile*100
             y_connect_ratio[i]=(compute_stats_threshold(i,'connect')[0])/nb_rent_connect*100
         df_delay_stat_treshold = pd.DataFrame({'Threshold (min)': x_plot.values(),'Rent_lost_mobile(%)': y_mobile_ratio.values(),'Rent_lost_connect(%)': y_connect_ratio.values()})
-    st.success('Terminé !')
+    suc = st.success('Terminé !',icon:"✅")
     st.line_chart(data=df_delay_stat_treshold, x='Threshold (min)', y=["Rent_lost_mobile(%)", 'Rent_lost_connect(%)'], use_container_width=True)
-    
+    suc = st.text('')
     
     delay = st.slider('Quel délai en deux locations (en minutes) :', 0, 400, 60)
     delay=int(delay)
