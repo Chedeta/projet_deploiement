@@ -58,6 +58,8 @@ def page2():
 
     df_delay_num = dataset_delay.select_dtypes(include = ['float64', 'int64', 'UInt32'])
     #Count the number of cases where the delay at check out was higher than expected
+    dataset_delay.dropna(subset=['delay_at_checkout_in_minutes'], inplace=True)
+    dataset_delay = dataset_delay.reset_index(drop=True)
     dataset_delay['delay_problem']= dataset_delay['delay_at_checkout_in_minutes']-dataset_delay['time_delta_with_previous_rental_in_minutes']
     def compute_stats_threshold(delay_tresh, check_type):
         if check_type == 'connect':
