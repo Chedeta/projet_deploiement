@@ -54,7 +54,8 @@ def page2():
 
     data_load_state = st.text('Loading data...')
     dataset_delay = load_data2()
-    data_load_state.text("") # change text from "Loading data..." to "" once the the load_data function has run
+    data_load_state.text("TIRIORIKRKOO") # change text from "Loading data..." to "" once the the load_data function has run
+    st.text(dataset_delay.columns)
     #Count the number of cases where the delay at check out was higher than expected
     dataset_delay.dropna(subset=['delay_at_checkout_in_minutes'], inplace=True)
     dataset_delay = dataset_delay.reset_index(drop=True)
