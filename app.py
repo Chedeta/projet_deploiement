@@ -1,5 +1,5 @@
 import streamlit as st
-
+st.set_page_config(page_title='GetAround project', page_icon=🚗, layout="wide", initial_sidebar_state="auto", menu_items=None)
 def main_page():
     st.markdown("# Accueil 🎈")
     st.sidebar.markdown("# Accueil 🎈")
@@ -156,10 +156,10 @@ def page3():
         result = predict_price(list_values)
         st.success(f"Le montant de location à la journée de votre véhicule s'élève à {result:.2f} €")
 page_names_to_funcs = {
-    "Main Page": main_page,
+    "Accueil": main_page,
     "Dashboard": page2,
     "Prédiction": page3,
 }
 
-selected_page = st.sidebar.selectbox("Select a page", page_names_to_funcs.keys())
+selected_page = st.sidebar.selectbox("Selectionner une page :", page_names_to_funcs.keys())
 page_names_to_funcs[selected_page]()
