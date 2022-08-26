@@ -1,5 +1,5 @@
 import streamlit as st
-st.set_page_config(page_title='GetAround project', page_icon=🚗, layout="wide", initial_sidebar_state="auto", menu_items=None)
+st.set_page_config(page_title='GetAround project', page_icon='🚗', layout="wide", initial_sidebar_state="auto", menu_items=None)
 def main_page():
     st.markdown("# Accueil 🎈")
     st.sidebar.markdown("# Accueil 🎈")
