@@ -1,8 +1,19 @@
 import streamlit as st
 
 def main_page():
-    st.markdown("# Main page 🎈")
-    st.sidebar.markdown("# Main page 🎈")
+    st.markdown("# Accueil 🎈")
+    st.sidebar.markdown("# Accueil 🎈")
+    st.title("Bienvenue sur notre site de recommandation de prix de location avec GetAround 🚗")
+
+    st.markdown("""
+        Welcome to this awesome `streamlit` dashboard. This library is great to build very fast and
+        intuitive charts and application running on the web. Here is a showcase of what you can do with
+        it. Our data comes from an e-commerce website that simply displays samples of customer sales. Let's check it out.
+        Also, if you want to have a real quick overview of what streamlit is all about, feel free to watch the below video 👇
+    """)
+
+
+    st.markdown("---")
 
 def page2():
     import streamlit as st
