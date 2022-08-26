@@ -84,8 +84,10 @@ def page2():
     df_delay_stat_treshold = pd.DataFrame({'Threshold (min)': x_plot.values(),'Rent_lost_mobile(%)': y_mobile_ratio.values(),'Rent_lost_connect(%)': y_connect_ratio.values()})
 
     st.line_chart(data=df_delay_stat_treshold, x='Threshold (min)', y=["Rent_lost_mobile(%)", 'Rent_lost_connect(%)'], use_container_width=True)
-    values = st.slider('Select a range of values',0.0, 100.0, (25.0, 75.0))
-    st.write('Values:', values)
+    delay = st.slider('Quel délai souhaitez vous mettre en deux locations', 0, 400, 60)
+    delay=int(delay)
+    st.write('Pourcentage de location perdue sur mobile pour un délai de ', round(df_delay_stat_treshold.iloc[delay][1],2), 'minutes.')
+    st.write("Pourcentage de location perdue sur l'appli pour un délai de ", round(df_delay_stat_treshold.iloc[delay][2],2), 'minutes.')
 
 
 def page3():
