@@ -45,7 +45,7 @@ def page2():
     # Use `st.cache` when loading data is extremly useful
     # because it will cache your data so that your app 
     # won't have to reload it each time you refresh your app
-    @st.cache
+    @st.cache(allow_output_mutation=True)
     def load_data2():
         data2 = pd.read_csv(DATA_URL, sep=';')
         return data2
