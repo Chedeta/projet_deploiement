@@ -18,6 +18,7 @@ def main_page():
     """)
     st.header('Main metrics of dataset')
     main_metrics_cols = st.columns([20,30,50])
+    nb_rentals = len(data2)
     with main_metrics_cols[0]:
         st.metric(label = "Number of rentals", value= nb_rentals)
         st.metric(label = "Number of cars", value= data2['car_id'].nunique())
