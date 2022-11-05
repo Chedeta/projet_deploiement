@@ -6,28 +6,35 @@ def main_page():
     import plotly.graph_objects as go
     import numpy as np
     DATA_URL = 'get_around_delay_analysis.csv'
+    DATA_URL2 = 'get_around_pricing_project.csv'
     @st.cache(allow_output_mutation=True)
+    def load_data():
+        data = pd.read_csv(DATA_URL2)
+        return data
     def load_data2():
         data2 = pd.read_csv(DATA_URL, sep=';')
         return data2
+    dataset_pricing = load_data()
+    dataset_delay = load_data2()
+    
     st.markdown("# Accueil")
     st.sidebar.markdown("# Accueil")
     st.title("Bienvenue sur notre site de recommandation de prix de location avec GetAround 🚗")
-
     st.markdown("""
     """)
-    dataset_delay = load_data2()
     #rental_delay = dataset_delay[dataset_delay['previous_rental_checkout_delay_in_minutes'] > 0]
     st.header('Quelques chiffres..')
     main_metrics_cols = st.columns([33,33,34])
     nb_rentals = len(dataset_delay)
     with main_metrics_cols[0]:
         st.metric(label = "Nombres de voitures dans le parc :", value= dataset_delay['car_id'].nunique())
-        st.metric(label = "Nombres de locations :", value= nb_rentals)
+        st.metric(label = "Pourcentage de voitures équipées 'Connect' :", value= f"{round(len(dataset_pricing[dataset_pricing['has_getaround_connect'] == True]) /len(dataset_pricing) * 100)} %")
     with main_metrics_cols[2]:
-        st.metric(label = "Pourcentage de location via 'Connect' :", value= f"{round(len(dataset_delay[dataset_delay['checkin_type'] == 'connect']) /nb_rentals * 100)}%")
+        st.metric(label = "Nombres de locations :", value= nb_rentals)
+        st.metric(label = "Pourcentage de location via 'Connect' :", value= f"{round(len(dataset_delay[dataset_delay['checkin_type'] == 'connect']) /nb_rentals * 100)} %")
     with main_metrics_cols[1]:
-        st.metric(label = "Pourcentage de locations rendues avec retard :", value= f"{round(len(dataset_delay[dataset_delay['delay_at_checkout_in_minutes'] > 0]) /nb_rentals * 100)}%")
+        st.metric(label = "Pourcentage de locations rendues avec retard :", value= f"{round(len(dataset_delay[dataset_delay['delay_at_checkout_in_minutes'] > 0]) /nb_rentals * 100)} %")
+        st.metric(label = "Pourcentage de locations annulées :", value= f"{round(len(dataset_delay[dataset_delay['state'] == 'canceled']) /nb_rentals * 100)} %")
     st.markdown("---")
 
 def page2():
