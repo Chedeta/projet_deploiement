@@ -1,6 +1,11 @@
 import streamlit as st
 st.set_page_config(page_title='GetAround project', page_icon='🚗', layout="wide", initial_sidebar_state="auto", menu_items=None)
 def main_page():
+    DATA_URL = 'get_around_delay_analysis.csv'
+    @st.cache(allow_output_mutation=True)
+    def load_data2():
+        data2 = pd.read_csv(DATA_URL, sep=';')
+        return data2
     st.markdown("# Accueil 🎈")
     st.sidebar.markdown("# Accueil 🎈")
     st.title("Bienvenue sur notre site de recommandation de prix de location avec GetAround 🚗")
@@ -11,8 +16,15 @@ def main_page():
         it. Our data comes from an e-commerce website that simply displays samples of customer sales. Let's check it out.
         Also, if you want to have a real quick overview of what streamlit is all about, feel free to watch the below video 👇
     """)
-
-
+    st.header('Main metrics of dataset')
+    main_metrics_cols = st.columns([20,30,50])
+    with main_metrics_cols[0]:
+        st.metric(label = "Number of rentals", value= nb_rentals)
+        st.metric(label = "Number of cars", value= data2['car_id'].nunique())
+    with main_metrics_cols[2]:
+        st.metric(label = "Share of 'Connect' rentals", value= f"{round(len(data2[data2['checkin_type'] == 'connect']) /nb_rentals * 100)}%")
+    with main_metrics_cols[1]:
+        st.metric(label = "Share of consecutive rentals of a same car", value= f"{round(len(data2[~data2['previous_ended_rental_id'].isna()]) /nb_rentals * 100)}%")
     st.markdown("---")
 
 def page2():
