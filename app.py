@@ -95,8 +95,8 @@ def page2():
         delay = st.slider('Quel délai en deux locations (en minutes) :', 0, 400, 60)
         delay=int(delay)
     with main_metrics_cols[1]:
-        st.metric(label = f"Pourcentage de location perdue sur **mobile** pour un délai de {delay} minutes :", value={(df_delay_stat_treshold.iloc[delay][1])/100:.2%})
-        st.metric(label = f"Pourcentage de location perdue sur **l'application** pour un délai de {delay} minutes :", value={(df_delay_stat_treshold.iloc[delay][2])/100:.2%})
+        st.metric(label = f"Pourcentage de location perdue sur **mobile** pour un délai de {delay} minutes :", value=(df_delay_stat_treshold.iloc[delay][1]))
+        st.metric(label = f"Pourcentage de location perdue sur **l'application** pour un délai de {delay} minutes :", value=(df_delay_stat_treshold.iloc[delay][2]))
 def page3():
     import streamlit as st
     import numpy as np
