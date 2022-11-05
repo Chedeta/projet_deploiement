@@ -63,7 +63,7 @@ def page2():
     st.subheader("Partie X : Dans quelle mesure le délai mis en place entre les deux locations affecte le nombre de locations ?")
     dataset_delay = load_data2()
     main_metrics_cols_2 = st.columns([70,30])
-    with main_metrics_cols[0]:
+    with main_metrics_cols_2[0]:
         with st.spinner('Chargement...'):
             dataset_delay.dropna(subset=['delay_at_checkout_in_minutes'], inplace=True)
             dataset_delay = dataset_delay.reset_index(drop=True)
@@ -94,7 +94,7 @@ def page2():
             st.line_chart(data=df_delay_stat_treshold, x='Threshold (min)', y=["Rent_lost_mobile(%)", 'Rent_lost_connect(%)'], use_container_width=True)
         delay = st.slider('Quel délai en deux locations (en minutes) :', 0, 400, 60)
         delay=int(delay)
-    with main_metrics_cols[1]:
+    with main_metrics_cols_2[1]:
         st.metric(label = f"Pourcentage de location perdue sur **mobile** pour un délai de {delay} minutes :", value=(df_delay_stat_treshold.iloc[delay][1]))
         st.metric(label = f"Pourcentage de location perdue sur **l'application** pour un délai de {delay} minutes :", value=(df_delay_stat_treshold.iloc[delay][2]))
 def page3():
