@@ -21,7 +21,7 @@ def main_page():
         Also, if you want to have a real quick overview of what streamlit is all about, feel free to watch the below video 👇
     """)
     dataset_delay = load_data2()
-    rental_delay = dataset_delay[dataset_delay['previous_rental_checkout_delay_in_minutes'] > 0]
+    #rental_delay = dataset_delay[dataset_delay['previous_rental_checkout_delay_in_minutes'] > 0]
     st.header('Main metrics of dataset')
     main_metrics_cols = st.columns([20,30,50])
     nb_rentals = len(dataset_delay)
@@ -32,7 +32,7 @@ def main_page():
         st.metric(label = "Share of 'Connect' rentals", value= f"{round(len(dataset_delay[dataset_delay['checkin_type'] == 'connect']) /nb_rentals * 100)}%")
     with main_metrics_cols[1]:
         st.metric(label = "Share of consecutive rentals of a same car", value= f"{round(len(dataset_delay[~dataset_delay['previous_ended_rental_id'].isna()]) /nb_rentals * 100)}%")
-        st.metric(label = "Max. delta between consecutive rentals", value= f"{round(rental_delay['time_delta_with_previous_rental_in_minutes'].max())} minutes")
+        #st.metric(label = "Max. delta between consecutive rentals", value= f"{round(rental_delay['time_delta_with_previous_rental_in_minutes'].max())} minutes")
     st.markdown("---")
 
 def page2():
