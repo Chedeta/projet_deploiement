@@ -1,6 +1,10 @@
 import streamlit as st
 st.set_page_config(page_title='GetAround project', page_icon='🚗', layout="wide", initial_sidebar_state="auto", menu_items=None)
 def main_page():
+    import pandas as pd
+    import plotly.express as px 
+    import plotly.graph_objects as go
+    import numpy as np
     DATA_URL = 'get_around_delay_analysis.csv'
     @st.cache(allow_output_mutation=True)
     def load_data2():
