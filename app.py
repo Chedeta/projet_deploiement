@@ -73,7 +73,8 @@ def page2():
     with main_metrics_cols_1[2]:
         moyenne_retard = dataset_delay[(dataset_delay["state"] == "ended") & (dataset_delay["delay_at_checkout_in_minutes"] > 0)]["delay_at_checkout_in_minutes"].mean()
         st.metric(label = "Retard moyen : ", value=f"{round(moyenne_retard,2)} minutes")
-        st.metric(label = "Retard supérieur à 1h :", value=f"{round(len(dataset_delay[(dataset_delay["state"] == "ended") & (dataset_delay["delay_at_checkout_in_minutes"] >60)])/len(dataset_delay[dataset_delay["state"] == "ended"],2)} %")
+        retard_une_h = len(dataset_delay[(dataset_delay["state"] == "ended") & (dataset_delay["delay_at_checkout_in_minutes"] >60)])/len(dataset_delay[dataset_delay["state"] == "ended"])
+        st.metric(label = "Retard supérieur à 1h :", value=f"{round(retard_une_h,2)} %")
     st.markdown("---")
     st.subheader("Partie 2 : Dans quelle mesure le délai mis en place entre les deux locations affecte le nombre de locations ?")
     main_metrics_cols_2 = st.columns([70,30])
