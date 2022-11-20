@@ -43,6 +43,7 @@ def page2():
     import plotly.express as px 
     import plotly.graph_objects as go
     import numpy as np
+    import math
 
     DATA_URL = 'get_around_delay_analysis.csv'
     
