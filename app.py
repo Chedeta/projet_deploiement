@@ -22,7 +22,6 @@ def main_page():
     st.title("Bienvenue sur notre site de recommandation de prix de location avec GetAround 🚗")
     st.markdown("""
     """)
-    #rental_delay = dataset_delay[dataset_delay['previous_rental_checkout_delay_in_minutes'] > 0]
     st.header('Quelques chiffres..')
     main_metrics_cols = st.columns([33,33,34])
     nb_rentals = len(dataset_delay)
@@ -49,10 +48,7 @@ def page2():
     
     st.title("Dashboard : Analyse d'un jeu de données de GetAround 🚗💲")
     st.markdown("""
-        Welcome to this awesome `streamlit` dashboard. This library is great to build very fast and
-        intuitive charts and application running on the web. Here is a showcase of what you can do with
-        it. Our data comes from an e-commerce website that simply displays samples of customer sales. Let's check it out.
-        Also, if you want to have a real quick overview of what streamlit is all about, feel free to watch the below video 👇
+Voici quelques informations clefs pour comprendre la dynamique des retards lors des réservations sur GetAround 🚗, ainsi que leur impact sur les locations, et donc sur le chiffre d'affaire potentiel de GetAround 🚗.
     """)
     st.markdown("---")
     
