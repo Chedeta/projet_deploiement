@@ -60,16 +60,19 @@ def page2():
         data2 = pd.read_csv(DATA_URL, sep=';')
         return data2
     dataset_delay = load_data2()
-    st.subheader("Partie 1 : Part de retard dans les checkouts")
-    main_metrics_cols_1 = st.columns([50,50])
+    st.subheader("Partie 1 : Overview des retards")
+    main_metrics_cols_1 = st.columns([34,33,33])
     with main_metrics_cols_1[0]:
         labels = ["A l'heure ou en avance", 'En retard', 'Inconnu']
         values = [len(dataset_delay[(dataset_delay["state"] == "ended") & (dataset_delay["delay_at_checkout_in_minutes"] <= 0)]), len(dataset_delay[(dataset_delay["state"] == "ended") & (dataset_delay["delay_at_checkout_in_minutes"] > 0)])]
-        fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
+        fig = go.Figure(data=[go.Pie(labels=labels, values=values, title="Part des retards dans les réservations abouties")])
         st.plotly_chart(fig, use_container_width=True)
     with main_metrics_cols_1[1]:
-        fig2 = px.histogram(dataset_delay[(dataset_delay["state"] == "ended") & (dataset_delay["delay_at_checkout_in_minutes"] > 0)], y="delay_at_checkout_in_minutes", x="checkin_type", title="Distribution des retards en minutes")
+        fig2 = px.histogram(dataset_delay[(dataset_delay["state"] == "ended") & (dataset_delay["delay_at_checkout_in_minutes"] > 0)], y="delay_at_checkout_in_minutes", title="Distribution des retards en minutes", labels={"delay_at_checkout_in_minutes":"Retard au checkout (mn)"})
         st.plotly_chart(fig2, use_container_width=True)
+    with main_metrics_cols_1[2]:
+        st.metric(label = f"Retard moyen :", value=f"{round(mean(dataset_delay[(dataset_delay["state"] == "ended") & (dataset_delay["delay_at_checkout_in_minutes"] > 0)]["delay_at_checkout_in_minutes"]),2)} minutes")
+        st.metric(label = f"Retard supérieur à 1h :", value=f"{round(len(dataset_delay[(dataset_delay["state"] == "ended") & (dataset_delay["delay_at_checkout_in_minutes"] >60)])/len(dataset_delay[dataset_delay["state"] == "ended"],2)} %")
     st.markdown("---")
     st.subheader("Partie 2 : Dans quelle mesure le délai mis en place entre les deux locations affecte le nombre de locations ?")
     main_metrics_cols_2 = st.columns([70,30])
