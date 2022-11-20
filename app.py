@@ -61,15 +61,10 @@ def page2():
         return data2
     dataset_delay = load_data2()
     st.subheader("Partie 1 : Part de retard dans les checkouts")
-    labels = "A l'heure ou en avance", 'En retard', 'Inconnu'
-    sizes = [len(dataset_delay[(dataset_delay["state"] == "ended") & (dataset_delay["delay_at_checkout_in_minutes"] <= 0)]), len(dataset_delay[(dataset_delay["state"] == "ended") & (dataset_delay["delay_at_checkout_in_minutes"] > 0)]), len(dataset_delay[(dataset_delay["state"] == "ended") & (dataset_delay["delay_at_checkout_in_minutes"] == "")])]
-    explode = (0, 0.1, 0)
-
-    fig1, ax1 = plt.subplots()
-    ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
-            shadow=True, startangle=90)
-    ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-    st.pyplot(fig1)
+    labels = ["A l'heure ou en avance", 'En retard', 'Inconnu']
+    values = [len(dataset_delay[(dataset_delay["state"] == "ended") & (dataset_delay["delay_at_checkout_in_minutes"] <= 0)]), len(dataset_delay[(dataset_delay["state"] == "ended") & (dataset_delay["delay_at_checkout_in_minutes"] > 0)]), len(dataset_delay[(dataset_delay["state"] == "ended") & (dataset_delay["delay_at_checkout_in_minutes"] == "")])]
+    fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
+    st.plotly_chart(fig, use_container_width=True)
     st.markdown("---")
     st.subheader("Partie 2 : Dans quelle mesure le délai mis en place entre les deux locations affecte le nombre de locations ?")
     main_metrics_cols_2 = st.columns([70,30])
