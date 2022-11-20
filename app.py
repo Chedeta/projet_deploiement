@@ -35,7 +35,23 @@ def main_page():
         st.metric(label = "Pourcentage de locations rendues avec retard :", value= f"{round(len(dataset_delay[dataset_delay['delay_at_checkout_in_minutes'] > 0]) /nb_rentals * 100)} %")
         st.metric(label = "Pourcentage de locations annulées :", value= f"{round(len(dataset_delay[dataset_delay['state'] == 'canceled']) /nb_rentals * 100)} %")
     st.markdown("---")
-
+    footer = """
+                <style>
+                .footer {
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                background-color: white;
+                color: black;
+                text-align: center;
+                }
+                </style>
+        <div class="footer">
+            <p>Fait avec passion par Hélène et Jean</p>
+        </div>
+    """
+    st.markdown(footer,unsafe_allow_html=True)
 def page2():
     import streamlit as st
     import pandas as pd
