@@ -62,7 +62,7 @@ def page2():
     dataset_delay = load_data2()
     st.subheader("Partie 1 : Part de retard dans les checkouts")
     labels = "A l'heure ou en avance", 'En retard', 'Inconnu'
-    sizes = [len(dataset_delay[dataset_delay["state"] == "ended" & dataset_delay["delay_at_checkout_in_minutes"] <= 0]), len(dataset_delay[dataset_delay["state"] == "ended" & dataset_delay["delay_at_checkout_in_minutes"] > 0]), len(dataset_delay[dataset_delay["state"] == "ended" & dataset_delay["delay_at_checkout_in_minutes"] == ""])]
+    sizes = [len(dataset_delay[(dataset_delay["state"] == "ended") & (dataset_delay["delay_at_checkout_in_minutes"] <= 0)]), len(dataset_delay[(dataset_delay["state"] == "ended") & (dataset_delay["delay_at_checkout_in_minutes"] > 0)]), len(dataset_delay[(dataset_delay["state"] == "ended") & (dataset_delay["delay_at_checkout_in_minutes"] == "")])]
     explode = (0, 0.1, 0)
 
     fig1, ax1 = plt.subplots()
