@@ -30,3 +30,5 @@ L'outil de prédiction des prix des véhicules est disponible dans la version st
 
 
 ## 4. Crédits
+
+Auteurs : Jean Ivars, avec la participation d'<a href='https://github.com/Bebock'>Hélène</a>
