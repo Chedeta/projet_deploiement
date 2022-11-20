@@ -68,12 +68,12 @@ def page2():
         fig = go.Figure(data=[go.Pie(labels=labels, values=values, title="Part des retards dans les réservations abouties")])
         st.plotly_chart(fig, use_container_width=True)
     with main_metrics_cols_1[1]:
-        fig2 = px.histogram(dataset_delay[(dataset_delay["state"] == "ended") & (dataset_delay["delay_at_checkout_in_minutes"] > 0)], y="delay_at_checkout_in_minutes", title="Distribution des retards en minutes", labels={"delay_at_checkout_in_minutes":"Retard au checkout (mn)"})
+        fig2 = px.histogram(dataset_delay[(dataset_delay["state"] == "ended") & (dataset_delay["delay_at_checkout_in_minutes"] > 0)], x="delay_at_checkout_in_minutes", range_x=[0, 12*60], title="Distribution des retards en minutes", labels={"delay_at_checkout_in_minutes":"Retard au checkout (mn)"})
         st.plotly_chart(fig2, use_container_width=True)
     with main_metrics_cols_1[2]:
         moyenne_retard = dataset_delay[(dataset_delay["state"] == "ended") & (dataset_delay["delay_at_checkout_in_minutes"] > 0)]["delay_at_checkout_in_minutes"].mean()
         st.metric(label = "Retard moyen : ", value=f"{round(moyenne_retard,2)} minutes")
-        retard_une_h = len(dataset_delay[(dataset_delay["state"] == "ended") & (dataset_delay["delay_at_checkout_in_minutes"] >60)])/len(dataset_delay[dataset_delay["state"] == "ended"])
+        retard_une_h = 100*(len(dataset_delay[(dataset_delay["state"] == "ended") & (dataset_delay["delay_at_checkout_in_minutes"] >60)])/len(dataset_delay[dataset_delay["state"] == "ended"]))
         st.metric(label = "Retard supérieur à 1h :", value=f"{round(retard_une_h,2)} %")
     st.markdown("---")
     st.subheader("Partie 2 : Dans quelle mesure le délai mis en place entre les deux locations affecte le nombre de locations ?")
