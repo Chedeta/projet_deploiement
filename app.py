@@ -63,10 +63,9 @@ def page2():
     st.subheader("Partie 1 : Overview des retards")
     main_metrics_cols_1 = st.columns([34,33,33])
     with main_metrics_cols_1[0]:
-        labels = {"A l'heure ou en avance", 'En retard', 'Inconnu'}
+        labels = ["A l'heure ou en avance", 'En retard']
         values = [len(dataset_delay[(dataset_delay["state"] == "ended") & (dataset_delay["delay_at_checkout_in_minutes"] <= 0)]), len(dataset_delay[(dataset_delay["state"] == "ended") & (dataset_delay["delay_at_checkout_in_minutes"] > 0)])]
-        fig = px.pie(labels=labels, values=values, title="Part des retards dans les réservations abouties")
-        fig.update_layout(showlegend=True)
+        fig = px.pie(names=labels, values=values, title="Part des retards dans les réservations abouties")
         st.plotly_chart(fig, use_container_width=True)
     with main_metrics_cols_1[1]:
         bin_width= 60
