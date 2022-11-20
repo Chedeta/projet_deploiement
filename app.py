@@ -59,9 +59,19 @@ def page2():
     def load_data2():
         data2 = pd.read_csv(DATA_URL, sep=';')
         return data2
-
-    st.subheader("Partie X : Dans quelle mesure le délai mis en place entre les deux locations affecte le nombre de locations ?")
     dataset_delay = load_data2()
+    st.subheader("Partie 1 : Part de retard dans les checkouts")
+    labels = "A l'heure ou en avance", 'En retard', 'Inconnu'
+    sizes = [len(dataset_delay[dataset_delay["state"] == "ended" & dataset_delay["delay_at_checkout_in_minutes"] <= 0]), len(dataset_delay[dataset_delay["state"] == "ended" & dataset_delay["delay_at_checkout_in_minutes"] > 0]), len(dataset_delay[dataset_delay["state"] == "ended" & dataset_delay["delay_at_checkout_in_minutes"] == ""])]
+    explode = (0, 0.1, 0)
+
+    fig1, ax1 = plt.subplots()
+    ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
+            shadow=True, startangle=90)
+    ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+    st.pyplot(fig1)
+    st.markdown("---")
+    st.subheader("Partie 2 : Dans quelle mesure le délai mis en place entre les deux locations affecte le nombre de locations ?")
     main_metrics_cols_2 = st.columns([70,30])
     with main_metrics_cols_2[0]:
         with st.spinner('Chargement...'):
@@ -97,6 +107,7 @@ def page2():
     with main_metrics_cols_2[1]:
         st.metric(label = f"Pourcentage de location perdue sur mobile pour un délai de {delay} minutes :", value=f"{round(df_delay_stat_treshold.iloc[delay][1],2)} %")
         st.metric(label = f"Pourcentage de location perdue sur l'app pour un délai de {delay} minutes :", value=f"{round(df_delay_stat_treshold.iloc[delay][2],2)} %")
+
 def page3():
     import streamlit as st
     import numpy as np
