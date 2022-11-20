@@ -63,12 +63,15 @@ def page2():
     st.subheader("Partie 1 : Overview des retards")
     main_metrics_cols_1 = st.columns([34,33,33])
     with main_metrics_cols_1[0]:
-        labels = ["A l'heure ou en avance", 'En retard', 'Inconnu']
+        labels = {"A l'heure ou en avance", 'En retard', 'Inconnu'}
         values = [len(dataset_delay[(dataset_delay["state"] == "ended") & (dataset_delay["delay_at_checkout_in_minutes"] <= 0)]), len(dataset_delay[(dataset_delay["state"] == "ended") & (dataset_delay["delay_at_checkout_in_minutes"] > 0)])]
         fig = px.pie(labels=labels, values=values, title="Part des retards dans les réservations abouties")
+        fig.update_layout(showlegend=True)
         st.plotly_chart(fig, use_container_width=True)
     with main_metrics_cols_1[1]:
-        fig2 = px.histogram(dataset_delay[(dataset_delay["state"] == "ended") & (dataset_delay["delay_at_checkout_in_minutes"] > 0)], x="delay_at_checkout_in_minutes", range_x=[0, 12*60], title="Distribution des retards en minutes", labels={"delay_at_checkout_in_minutes":"Retard au checkout (mn)"}, nbins=12)
+        bin_width= 60
+        nbins = math.ceil((dataset_delay["delay_at_checkout_in_minutes"].max() / bin_width)
+        fig2 = px.histogram(dataset_delay[(dataset_delay["state"] == "ended") & (dataset_delay["delay_at_checkout_in_minutes"] > 0)], x="delay_at_checkout_in_minutes", range_x=[0, 12*60], title="Distribution des retards en minutes", labels={"delay_at_checkout_in_minutes":"Retard au checkout (mn)"}, nbins=nbins)
         st.plotly_chart(fig2, use_container_width=True)
     with main_metrics_cols_1[2]:
         moyenne_retard = dataset_delay[(dataset_delay["state"] == "ended") & (dataset_delay["delay_at_checkout_in_minutes"] > 0)]["delay_at_checkout_in_minutes"].mean()
