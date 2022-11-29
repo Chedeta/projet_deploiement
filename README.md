@@ -1,5 +1,7 @@
 # Projet déploiement : Impact des retards avec GetAround
 
+🎬 <a href='https://share.vidyard.com/watch/M8rYFKKBYNK9vfRQg4M7ke?'>Cliquer ici pour la vidéo de présentation du projet</a>
+
 ![image](https://user-images.githubusercontent.com/96300465/202905294-fa20ea95-12a3-486e-9d63-2559adbff01e.png)
 
 ## 1. Objectif
